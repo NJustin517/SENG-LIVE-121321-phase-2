@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useHistory, Link } from "react-router-dom";
 
 function ProjectDetail() {
   const [claps, setClaps] = useState(0);
   const [project, setProject] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const id = 1;
+  const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     fetch(`http://localhost:3000/projects/${id}`)
@@ -46,6 +48,7 @@ function ProjectDetail() {
           <div className="extra">
             <span className="badge blue">Phase {phase}</span>
           </div>
+          <Link onClick={() => history.goBack()}>Go back</Link>
         </div>
       </div>
     </section>

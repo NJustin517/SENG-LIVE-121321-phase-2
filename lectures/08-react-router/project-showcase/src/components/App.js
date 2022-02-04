@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Switch, Route } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
 import ProjectForm from "./ProjectForm";
@@ -35,10 +36,19 @@ function App() {
         setCurrentUser={setCurrentUser}
       />
       {/* wouldn't it be nice if these were separate pages? */}
-      <Home />
-      <ProjectForm onAddProject={handleAddProject} />
-      <ProjectList projects={projects} />
-      <ProjectDetail />
+      <Switch>
+        <Route
+          path="/projects/new"
+          component={() => <ProjectForm onAddProject={handleAddProject} />}
+        />
+        <Route path="/projects/:id" component={ProjectDetail} />
+        <Route
+          path="/projects"
+          component={() => <ProjectList projects={projects} />}
+        />
+        <Route path="/" component={Home} />
+      </Switch>
+      {/* <ProjectDetail /> */}
     </div>
   );
 }
